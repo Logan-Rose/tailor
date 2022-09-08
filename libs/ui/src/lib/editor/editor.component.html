@@ -1,0 +1,19 @@
+<div class="menu">
+  <button class="button" (click)="addTile()">Add</button>
+  <button class="button" (click)="save()">Save</button>
+  <button class="button" (click)="load()">Load</button>
+  <button class="button" (click)="editMode()">Edit</button>
+  <button class="button" (click)="print()">Print</button>
+</div>
+
+<gridster [options]="options">
+  <gridster-item [item]="item" *ngFor="let item of dashboard">
+    <tailor-tile
+      [title]="item['title']"
+      [subtitle]="item['subtitle']"
+      [body]="item['body']"
+      [editMode]="editing"
+    >
+    </tailor-tile>
+  </gridster-item>
+</gridster>

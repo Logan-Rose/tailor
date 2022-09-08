@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@tailor/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@tailor/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@tailor/ui": ["libs/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -5,6 +5,7 @@
     "api": "apps/api",
     "api-interfaces": "libs/api-interfaces",
     "tailor": "apps/tailor",
-    "tailor-e2e": "apps/tailor-e2e"
+    "tailor-e2e": "apps/tailor-e2e",
+    "ui": "libs/ui"
   }
 }
