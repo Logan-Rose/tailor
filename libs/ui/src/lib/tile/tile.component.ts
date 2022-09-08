@@ -11,7 +11,8 @@ export class TileComponent implements OnInit {
   @Input() body?: string;
   @Input() fromDate?: Date;
   @Input() toDate?: Date;
-
+  @Input() align?: string;
+  @Input() titleSize?: number = 12;
   @Input() editMode?: boolean;
   editing = false;
 

@@ -1,6 +1,7 @@
 .menu{
   background-color: white;
-
+  display: flex;
+  flex-direction: row;
 }
 .button{
   background-color: aquamarine;
@@ -10,6 +11,35 @@
   border: none;
 }
 .button:hover{
+  background-color: rgb(92, 180, 151);
+  cursor: pointer;
+}
+.button-group-label{
+  padding: 0px;
+  margin: 0px;
+}
+.button-group-wrapper{
+  margin: 10px;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button-group{
+  display: flex;
+  flex-direction: row;
+}
+
+.mini-button{
+  background-color: aquamarine;
+  margin: 2px;
+  border: none;
+  width: 20px;
+  height: 20px;
+}
+.mini-button:hover{
   background-color: rgb(92, 180, 151);
   cursor: pointer;
 }

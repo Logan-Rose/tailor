@@ -6,5 +6,22 @@
   padding: 5px;
   display: flex !important;
   flex-direction: column !important;
+}
 
+h1, h2{
+  margin: 0px;
+}
+.align{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.left {
+  align-items: flex-start;
+}
+.center {
+  align-items: center;
+}
+.right {
+  align-items: flex-end;
 }

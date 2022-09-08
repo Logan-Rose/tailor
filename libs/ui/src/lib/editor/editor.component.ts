@@ -27,13 +27,13 @@ export class EditorComponent implements OnInit {
   // add Drop to add for saved components
   ngOnInit() {
     this.options = {
-      gridType: GridType.Fixed,
+      gridType: GridType.Fit,
       compactType: CompactType.None,
       margin: 5,
-      minCols:9,
-      maxCols:9,
-      minRows:9,
-      maxRows:9,
+      minCols:20,
+      maxCols:20,
+      minRows:20,
+      maxRows:20,
       useTransformPositioning: true,
       fixedColWidth: 105,
       fixedRowHeight: 105,
@@ -52,7 +52,7 @@ export class EditorComponent implements OnInit {
     };
 
      this.dashboard = [
-       {cols: 2, rows: 4, y: 0, x: 0, title: 'Logan Rose', subtitle: 'Software Engineer'},
+       {cols: 10, rows: 10, y: 0, x: 0, title: 'Logan Rose', subtitle: 'Software Engineer'},
        {cols: 2, rows: 4, y: 0, x: 2, title: 'Coveo', subtitle: 'Software Developer Consultant', body: ' Did stuff'}
      ];
   }
@@ -92,5 +92,11 @@ export class EditorComponent implements OnInit {
   }
   editMode(){
     this.editing = !this.editing
+  }
+  updateRow(num: number){
+    console.log(num)
+  }
+  updateCol(num: number){
+    console.log(num)
   }
 }

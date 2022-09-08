@@ -4,6 +4,20 @@
   <button class="button" (click)="load()">Load</button>
   <button class="button" (click)="editMode()">Edit</button>
   <button class="button" (click)="print()">Print</button>
+  <div class="button-group-wrapper">
+    <p class="button-group-label">Rows</p>
+    <div class="button-group">
+      <button class="mini-button" (click)="updateRow(1)">+</button>
+      <button class="mini-button" (click)="updateRow(-1)">-</button>
+    </div>
+  </div>
+  <div class="button-group-wrapper">
+    <p class="button-group-label">Columns</p>
+    <div class="button-group">
+      <button class="mini-button" (click)="updateCol(1)">+</button>
+      <button class="mini-button" (click)="updateCol(-1)">-</button>
+    </div>
+  </div>
 </div>
 
 <gridster [options]="options">

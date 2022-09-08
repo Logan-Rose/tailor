@@ -9,8 +9,10 @@ import { MatInputModule } from '@angular/material/input'
 import { FormsModule } from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatSliderModule} from '@angular/material/slider';
 @NgModule({
-  imports: [CommonModule, GridsterModule, NgxPrintModule, MatFormFieldModule, MatInputModule, FormsModule, MatDatepickerModule, MatNativeDateModule],
+  imports: [CommonModule, GridsterModule, NgxPrintModule, MatFormFieldModule, MatInputModule, FormsModule, MatDatepickerModule, MatNativeDateModule, MatRadioModule, MatSliderModule],
   declarations: [EditorComponent, TileComponent],
   exports: [EditorComponent, TileComponent],
 })

@@ -1,43 +1,65 @@
 <div class="header">
-  <button *ngIf="editMode" (click)="toggleEdit()">Edit</button>
+  <button *ngIf="editMode" (click)="toggleEdit()">
+    <div *ngIf="!editing">Edit</div>
+    <div *ngIf="editing">Save</div>
+  </button>
 </div>
-<div class="container">
-  <div *ngIf="!editing">
-    <h1>{{ title }}</h1>
-    <h2>{{ subtitle }}</h2>
-    <div *ngIf="fromDate && toDate">
-      <h2>{{ simplifyDate(fromDate) }} - {{ simplifyDate(toDate) }}</h2>
-    </div>
-    <div *ngIf="fromDate && toDate === undefined">
-      <h2>{{ simplifyDate(fromDate) }} - Present</h2>
-    </div>
-
-    <p>{{ body }}</p>
+<div
+  *ngIf="!!editing"
+  class="container"
+  [ngClass]="{
+    left: align === 'left',
+    center: align === 'center',
+    right: align === 'right'
+  }"
+>
+  <h1 [ngStyle]="{ 'font-size': titleSize + 'px' }">{{ title }}</h1>
+  <h2>{{ subtitle }}</h2>
+  <div *ngIf="fromDate && toDate">
+    <h2>{{ simplifyDate(fromDate) }} - {{ simplifyDate(toDate) }}</h2>
   </div>
-  <div *ngIf="editing">
-    <mat-form-field appearance="outline">
-      <input [(ngModel)]="title" matInput placeholder="Title" />
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <input [(ngModel)]="subtitle" matInput placeholder="Subtitle" />
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>From</mat-label>
-      <input [(ngModel)]="fromDate" matInput [matDatepicker]="from" />
-      <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
-      <mat-datepicker #from></mat-datepicker>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>To</mat-label>
-      <input [(ngModel)]="toDate" matInput [matDatepicker]="to" />
-      <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
-      <mat-datepicker #to></mat-datepicker>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <input [(ngModel)]="body" matInput placeholder="Body" />
-    </mat-form-field>
+  <div *ngIf="fromDate && toDate === undefined">
+    <h2>{{ simplifyDate(fromDate) }} - Present</h2>
   </div>
+  <p>{{ body }}</p>
+</div>
+<div *ngIf="!editing" class="container">
+  <label>Align</label>
+  <mat-radio-group class="align" [(ngModel)]="align">
+    <mat-radio-button value="left">Left</mat-radio-button>
+    <mat-radio-button value="center">Center</mat-radio-button>
+    <mat-radio-button value="right">Right</mat-radio-button>
+  </mat-radio-group>
+
+  <mat-slider
+    [(ngModel)]="titleSize"
+    min="10"
+    max="72"
+    step="1"
+    value="14"
+  ></mat-slider>
+
+  <mat-form-field appearance="outline">
+    <input [(ngModel)]="title" matInput placeholder="Title" />
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <input [(ngModel)]="subtitle" matInput placeholder="Subtitle" />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>From</mat-label>
+    <input [(ngModel)]="fromDate" matInput [matDatepicker]="from" />
+    <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+    <mat-datepicker #from></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>To</mat-label>
+    <input [(ngModel)]="toDate" matInput [matDatepicker]="to" />
+    <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+    <mat-datepicker #to></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <textarea [(ngModel)]="body" matInput placeholder="Body"></textarea>
+  </mat-form-field>
 </div>
