@@ -3,6 +3,10 @@
   <button class="button" (click)="save()">Save</button>
   <button class="button" (click)="load()">Load</button>
   <button class="button" (click)="editMode()">Edit</button>
+  <button class="button" (click)="lock()">
+    <div *ngIf="options.draggable?.enabled">Lock</div>
+    <div *ngIf="!options.draggable?.enabled">Unlock</div>
+  </button>
   <button class="button" (click)="print()">Print</button>
   <div class="button-group-wrapper">
     <p class="button-group-label">Rows</p>
@@ -23,10 +27,15 @@
 <gridster [options]="options">
   <gridster-item [item]="item" *ngFor="let item of dashboard">
     <tailor-tile
+      [x]="item['x']"
+      [y]="item['y']"
+      [rows]="item['rows']"
+      [cols]="item['cols']"
       [title]="item['title']"
       [subtitle]="item['subtitle']"
       [body]="item['body']"
       [editMode]="editing"
+      (duplicateEvent)="duplicateTile($event)"
     >
     </tailor-tile>
   </gridster-item>

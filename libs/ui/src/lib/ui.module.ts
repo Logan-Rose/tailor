@@ -12,7 +12,17 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSliderModule} from '@angular/material/slider';
 @NgModule({
-  imports: [CommonModule, GridsterModule, NgxPrintModule, MatFormFieldModule, MatInputModule, FormsModule, MatDatepickerModule, MatNativeDateModule, MatRadioModule, MatSliderModule],
+  imports: [CommonModule,
+    GridsterModule,
+    NgxPrintModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRadioModule,
+    MatSliderModule
+  ],
   declarations: [EditorComponent, TileComponent],
   exports: [EditorComponent, TileComponent],
 })

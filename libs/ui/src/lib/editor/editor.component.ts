@@ -9,6 +9,7 @@ import {
   PushDirections,
   Resizable
 } from 'angular-gridster2';
+import { TileComponent } from '../tile/tile.component';
 
 @Component({
   selector: 'tailor-editor',
@@ -53,7 +54,7 @@ export class EditorComponent implements OnInit {
 
      this.dashboard = [
        {cols: 10, rows: 10, y: 0, x: 0, title: 'Logan Rose', subtitle: 'Software Engineer'},
-       {cols: 2, rows: 4, y: 0, x: 2, title: 'Coveo', subtitle: 'Software Developer Consultant', body: ' Did stuff'}
+       {cols: 2, rows: 4, y: 0, x: 2, title: 'Coveo', subtitle: 'Software Developer Consultant', body: ' Did stuff', dragEnabled: true}
      ];
   }
 
@@ -91,12 +92,32 @@ export class EditorComponent implements OnInit {
     console.log('')
   }
   editMode(){
-    this.editing = !this.editing
+    this.editing = !this.editing  
   }
+
+  lock(){
+    console.log('Lockign')
+    if(this.options.draggable){
+      if(this.options.draggable.enabled != undefined){
+        console.log(this.options.draggable.enabled)
+        this.options.draggable.enabled = !this.options.draggable.enabled
+      }
+      if (this.options.api && this.options.api.optionsChanged) {
+        this.options.api.optionsChanged();
+      }
+    }
+  }
+
   updateRow(num: number){
     console.log(num)
   }
   updateCol(num: number){
     console.log(num)
+  }
+
+  duplicateTile(e: TileComponent){
+    console.log(e)
+    this.dashboard.push(e);
+    console.log(this.dashboard)
   }
 }
