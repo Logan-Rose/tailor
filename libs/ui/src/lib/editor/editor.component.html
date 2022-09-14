@@ -1,29 +1,51 @@
-<div class="menu">
-  <button class="button" (click)="addTile()">Add</button>
-  <button class="button" (click)="save()">Save</button>
-  <button class="button" (click)="load()">Load</button>
-  <button class="button" (click)="toggleBackground()">Toggle Background</button>
-  <button class="button" (click)="lock()">
-    <div *ngIf="options.draggable?.enabled">Lock</div>
-    <div *ngIf="!options.draggable?.enabled">Unlock</div>
-  </button>
-  <button class="button" (click)="print()">Print</button>
-  <div class="button-group-wrapper">
-    <p class="button-group-label">Rows</p>
-    <div class="button-group">
-      <button class="mini-button" (click)="updateRow(1)">+</button>
-      <button class="mini-button" (click)="updateRow(-1)">-</button>
+<div class="menu-container">
+  <div class="menu">
+    <!-- <button mat-raised-button mat-dialog-close (click)="save()" ></button> -->
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="addTile()"
+      class="button"
+    >
+      Add
+    </button>
+    <button mat-raised-button color="primary" (click)="save()" class="button">
+      Save
+    </button>
+    <button mat-raised-button color="primary" (click)="load()" class="button">
+      Load
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="toggleBackground()"
+      class="button"
+    >
+      Toggle Background
+    </button>
+    <button mat-raised-button color="primary" (click)="lock()" class="button">
+      <div *ngIf="options.draggable?.enabled">Lock</div>
+      <div *ngIf="!options.draggable?.enabled">Unlock</div>
+    </button>
+    <button mat-raised-button color="primary" (click)="print()" class="button">
+      Print
+    </button>
+    <!-- <div class="button-group-wrapper">
+      <p class="button-group-label">Rows</p>
+      <div class="button-group">
+        <button class="mini-button" (click)="updateRow(1)">+</button>
+        <button class="mini-button" (click)="updateRow(-1)">-</button>
+      </div>
     </div>
-  </div>
-  <div class="button-group-wrapper">
-    <p class="button-group-label">Columns</p>
-    <div class="button-group">
-      <button class="mini-button" (click)="updateCol(1)">+</button>
-      <button class="mini-button" (click)="updateCol(-1)">-</button>
-    </div>
+    <div class="button-group-wrapper">
+      <p class="button-group-label">Columns</p>
+      <div class="button-group">
+        <button class="mini-button" (click)="updateCol(1)">+</button>
+        <button class="mini-button" (click)="updateCol(-1)">-</button>
+      </div>
+    </div> -->
   </div>
 </div>
-
 <gridster
   [options]="options"
   [ngStyle]="{ 'background-color': background ? 'grey' : 'white' }"
@@ -42,12 +64,15 @@
       [title]="item['title']"
       [subtitle]="item['subtitle']"
       [body]="item['body']"
+      [bodyType]="item['bodyType']"
+      [listItems]="item['listItems']"
       [editMode]="item['editing']"
       [align]="item['align']"
       [titleSize]="item['titleSize']"
       [subtitleSize]="item['subtitleSize']"
       [fromDate]="item['fromDate']"
       [toDate]="item['toDate']"
+      [dragEnabled]="item['dragEnabled']"
       (duplicateEvent)="duplicateTile($event)"
       (deleteEvent)="deleteTile($event)"
       (saveEvent)="saveTile($event)"

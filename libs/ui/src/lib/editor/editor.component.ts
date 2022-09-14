@@ -11,6 +11,9 @@ import {
 } from 'angular-gridster2';
 import { TileComponent } from '../tile/tile.component';
 import { v4 as uuidv4 } from 'uuid';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+
+import { SaveDialogComponent } from '../save-dialog/save-dialog.component';
 
 @Component({
   selector: 'tailor-editor',
@@ -21,7 +24,7 @@ export class EditorComponent implements OnInit {
   options: GridsterConfig;
   dashboard: Array<GridsterItem>;
   background = true;
-  constructor() {
+  constructor(public dialog: MatDialog) {
     console.log('editor constructed')
     this.options = {}
     this.dashboard = []
@@ -54,8 +57,8 @@ export class EditorComponent implements OnInit {
     };
 
      this.dashboard = [
-       {id: uuidv4(), cols: 10, rows: 10, y: 0, x: 0, title: 'Logan Rose', subtitle: 'Software Engineer', align: "center", titleSize:12, subtitleSize:12},
-       {id: uuidv4(), cols: 2, rows: 2, y: 0, x: 2, title: 'Coveo', subtitle: 'Software Developer Consultant', body: ' Did stuff', dragEnabled: true, align:"left", titleSize:12, subtitleSize:12}
+       {id: uuidv4(), cols: 10, rows: 10, y: 0, x: 0, title: 'Logan Rose', subtitle: 'Software Engineer', align: "center", titleSize:12, subtitleSize:12, listItems: ['hello','goodbye'], dragEnabled: true},
+       {id: uuidv4(), cols: 2, rows: 2, y: 0, x: 2, title: 'Coveo', subtitle: 'Software Developer Consultant', bodyType:'chip-list',listItems:['hello','goodbye','javascript','python','angular','nestjs','postgresql'], align:"left", titleSize:12, subtitleSize:12, dragEnabled: true}
      ];
   }
 
@@ -74,11 +77,20 @@ export class EditorComponent implements OnInit {
   addTile(){
     console.log('add tile')
     console.log(uuidv4())
-    this.dashboard.push({ id: uuidv4(), x: 0, y: 0, cols: 1, rows: 1 });
+    this.dashboard.push({ id: uuidv4(), x: 0, y: 0, cols:9, rows: 3, title: 'New Tile', body: 'Double click to modify', titleSize:18, dragEnabled: true});
   }
   save(){
     console.log('Save')
     console.log(this.dashboard)
+    const dialogRef = this.dialog.open(SaveDialogComponent, {
+      data: this.dashboard
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+
+    
   }
   load(){
     console.log('Load')
@@ -125,11 +137,12 @@ export class EditorComponent implements OnInit {
     this.dashboard = this.dashboard.filter(x => x['id'] !== tile['id'])
     this.dashboard.push(tile)
     console.log(this.dashboard)
+    
   }
-  toggleEditMode(e: any){
-    e.editing = !e.editing
-    e.dragEnabled = !e.dragEnabled
-    console.log(e)
+  toggleEditMode(tile: any){
+      tile.editing = !tile.editing
+      tile.dragEnabled = !tile.dragEnabled
+      console.log(this.dashboard)
   }
   toggleBackground(){
     this.background = !this.background

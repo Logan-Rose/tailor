@@ -1,0 +1,16 @@
+<mat-card class="container">
+  <mat-card-title> Save Layout </mat-card-title>
+  <mat-card-content>
+    <mat-form-field appearance="outline">
+      <input matInput [(ngModel)]="name" placeholder="Name" />
+    </mat-form-field>
+  </mat-card-content>
+
+  <mat-card-footer style="padding-bottom: 10px">
+    <button mat-raised-button mat-dialog-close>Close</button>
+    &nbsp;
+    <button mat-raised-button mat-dialog-close (click)="save()" color="primary">
+      Save
+    </button>
+  </mat-card-footer>
+</mat-card>

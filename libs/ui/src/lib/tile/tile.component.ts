@@ -1,9 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { GridsterItem } from 'angular-gridster2';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"
 ];
+
 @Component({
   selector: 'tailor-tile',
   templateUrl: './tile.component.html',
@@ -18,7 +20,9 @@ export class TileComponent implements OnInit, GridsterItem{
   @Input() dragEnabled?: boolean;
   @Input() title?: string;
   @Input() subtitle?: string;
+  @Input() bodyType?: string;
   @Input() body?: string;
+  @Input() listItems: string[] = [];
   @Input() fromDate?: Date;
   @Input() toDate?: Date;
   @Input() align?: string;
@@ -26,10 +30,20 @@ export class TileComponent implements OnInit, GridsterItem{
   @Input() subtitleSize?: number = 12;
   @Input() editMode?: boolean;
   editing = false;
-
   @Output() duplicateEvent = new EventEmitter<TileComponent>();
   @Output() deleteEvent = new EventEmitter<string>();
   @Output() saveEvent = new EventEmitter<TileComponent>();
+
+
+  addOnBlur = true;
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+
+  readonly BODY_TYPES = [
+    'text',
+    'bullet-list',
+    'chip-list'
+  ];
+
 
   constructor() {
     console.log('Tile Constructed')
@@ -66,4 +80,27 @@ export class TileComponent implements OnInit, GridsterItem{
     console.log(this)
     this.saveEvent.emit(this)
   }
+  addItem(){
+    this.listItems?.push('')
+  }
+  removeLastItem(){
+    this.listItems?.pop()
+  }
+  removeItemAtPos(index:number){
+    this.listItems?.splice(index)
+  }
+  onValueUpdate(e:any){
+    console.log(e)
+    this.listItems[parseInt(e.target.name)] = e.target.value
+    console.log(this.listItems)
+  }
+
+  addChip(e:any){
+    if(e.value != ''){
+      this.listItems.push(e.value)
+      console.log(this.listItems)
+    }
+
+  }
+
 }

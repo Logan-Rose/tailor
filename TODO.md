@@ -5,12 +5,11 @@ ___
 
 1. Font selection
 2. Seperate alignment option for body
-3. Tile deletion
+3. Body Types
 4. individual tile locking
 5. Printing
 6. Row/col adding/deleting (dynamic row/col sizing?)
 7. Scrollign when in edit mode
-8. Lock bug
 
 SERVER
 ___
