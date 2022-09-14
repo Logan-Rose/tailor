@@ -43,3 +43,13 @@
   background-color: rgb(92, 180, 151);
   cursor: pointer;
 }
+
+gridster-item{
+  overflow-y: scroll;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+gridster-item::-webkit-scrollbar {
+  display: none;
+}
+

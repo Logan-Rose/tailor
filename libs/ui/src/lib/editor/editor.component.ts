@@ -10,6 +10,7 @@ import {
   Resizable
 } from 'angular-gridster2';
 import { TileComponent } from '../tile/tile.component';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'tailor-editor',
@@ -19,7 +20,7 @@ import { TileComponent } from '../tile/tile.component';
 export class EditorComponent implements OnInit {
   options: GridsterConfig;
   dashboard: Array<GridsterItem>;
-  editing = false
+  background = true;
   constructor() {
     console.log('editor constructed')
     this.options = {}
@@ -53,13 +54,14 @@ export class EditorComponent implements OnInit {
     };
 
      this.dashboard = [
-       {cols: 10, rows: 10, y: 0, x: 0, title: 'Logan Rose', subtitle: 'Software Engineer'},
-       {cols: 2, rows: 4, y: 0, x: 2, title: 'Coveo', subtitle: 'Software Developer Consultant', body: ' Did stuff', dragEnabled: true}
+       {id: uuidv4(), cols: 10, rows: 10, y: 0, x: 0, title: 'Logan Rose', subtitle: 'Software Engineer', align: "center", titleSize:12, subtitleSize:12},
+       {id: uuidv4(), cols: 2, rows: 2, y: 0, x: 2, title: 'Coveo', subtitle: 'Software Developer Consultant', body: ' Did stuff', dragEnabled: true, align:"left", titleSize:12, subtitleSize:12}
      ];
   }
 
   itemChange(){
-    console.log("Item Changed")
+    console.log('ITEM CHANGED')
+    console.log(this)
   }
   itemResize(){
     console.log("Item Resized")
@@ -69,17 +71,10 @@ export class EditorComponent implements OnInit {
     this.dashboard.splice(this.dashboard.indexOf(item), 1);
   }
 
-  addItem() {
-    this.dashboard.push({
-      x: 0,
-      y: 0,
-      rows: 0,
-      cols: 0
-    });
-  }
   addTile(){
     console.log('add tile')
-    this.dashboard.push({ x: 0, y: 0, cols: 1, rows: 1 });
+    console.log(uuidv4())
+    this.dashboard.push({ id: uuidv4(), x: 0, y: 0, cols: 1, rows: 1 });
   }
   save(){
     console.log('Save')
@@ -89,10 +84,7 @@ export class EditorComponent implements OnInit {
     console.log('Load')
   }
   print(){
-    console.log('')
-  }
-  editMode(){
-    this.editing = !this.editing  
+    console.log(this.dashboard)
   }
 
   lock(){
@@ -115,9 +107,31 @@ export class EditorComponent implements OnInit {
     console.log(num)
   }
 
-  duplicateTile(e: TileComponent){
-    console.log(e)
-    this.dashboard.push(e);
+  duplicateTile(e: any){
+    const duplicatedTile = Object.assign({}, e)
+    duplicatedTile.id = uuidv4();
+    this.dashboard.push(duplicatedTile);
     console.log(this.dashboard)
+  }
+
+  deleteTile(tileId: string){
+    console.log(this.dashboard)
+    console.log(tileId)
+    this.dashboard = this.dashboard.filter(x => x['id'] !== tileId)
+    console.log(this.dashboard)
+  }
+  saveTile(tile: any){
+    console.log(tile)
+    this.dashboard = this.dashboard.filter(x => x['id'] !== tile['id'])
+    this.dashboard.push(tile)
+    console.log(this.dashboard)
+  }
+  toggleEditMode(e: any){
+    e.editing = !e.editing
+    e.dragEnabled = !e.dragEnabled
+    console.log(e)
+  }
+  toggleBackground(){
+    this.background = !this.background
   }
 }

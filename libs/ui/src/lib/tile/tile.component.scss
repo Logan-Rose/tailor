@@ -1,13 +1,25 @@
 .header{
   width: 100%;
-  background-color: aquamarine;
 }
 .container {
   padding: 5px;
   display: flex !important;
   flex-direction: column !important;
 }
+.editing {
+  padding: 20px
+}
 
+.horizontal {
+  display: flex;
+  flex-direction: row;
+}
+.title-size-number {
+  width: 15%;
+}
+.title-size-slider {
+  width: 85%
+}
 h1, h2{
   margin: 0px;
 }

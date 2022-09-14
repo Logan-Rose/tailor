@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { GridsterItem } from 'angular-gridster2';
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"
@@ -8,11 +9,13 @@ const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
   templateUrl: './tile.component.html',
   styleUrls: ['./tile.component.scss'],
 })
-export class TileComponent implements OnInit {
+export class TileComponent implements OnInit, GridsterItem{
+  @Input() id!: string;
   @Input() x!: number;
   @Input() y!: number;
   @Input() rows!: number;
   @Input() cols!: number;
+  @Input() dragEnabled?: boolean;
   @Input() title?: string;
   @Input() subtitle?: string;
   @Input() body?: string;
@@ -25,6 +28,8 @@ export class TileComponent implements OnInit {
   editing = false;
 
   @Output() duplicateEvent = new EventEmitter<TileComponent>();
+  @Output() deleteEvent = new EventEmitter<string>();
+  @Output() saveEvent = new EventEmitter<TileComponent>();
 
   constructor() {
     console.log('Tile Constructed')
@@ -39,7 +44,6 @@ export class TileComponent implements OnInit {
   }
 
   simplifyDate(date: Date){
-    console.log(date)
     return MONTHS[date.getMonth()] + ' ' + date.getFullYear()
   }
 
@@ -51,6 +55,15 @@ export class TileComponent implements OnInit {
     console.log('duplicate')
     console.log(this)
     this.duplicateEvent.emit(this)
+  }
 
+  deleteTile(){
+    console.log('Delete')
+    this.deleteEvent.emit(this.id)
+  }
+
+  save(){
+    console.log(this)
+    this.saveEvent.emit(this)
   }
 }

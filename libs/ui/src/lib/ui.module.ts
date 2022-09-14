@@ -7,10 +7,11 @@ import { NgxPrintModule } from 'ngx-print';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input'
 import { FormsModule } from '@angular/forms';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatSliderModule} from '@angular/material/slider';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatCardModule } from '@angular/material/card';
 @NgModule({
   imports: [CommonModule,
     GridsterModule,
@@ -21,7 +22,8 @@ import {MatSliderModule} from '@angular/material/slider';
     MatDatepickerModule,
     MatNativeDateModule,
     MatRadioModule,
-    MatSliderModule
+    MatSliderModule,
+    MatCardModule
   ],
   declarations: [EditorComponent, TileComponent],
   exports: [EditorComponent, TileComponent],

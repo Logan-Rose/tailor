@@ -2,7 +2,7 @@
   <button class="button" (click)="addTile()">Add</button>
   <button class="button" (click)="save()">Save</button>
   <button class="button" (click)="load()">Load</button>
-  <button class="button" (click)="editMode()">Edit</button>
+  <button class="button" (click)="toggleBackground()">Toggle Background</button>
   <button class="button" (click)="lock()">
     <div *ngIf="options.draggable?.enabled">Lock</div>
     <div *ngIf="!options.draggable?.enabled">Unlock</div>
@@ -24,9 +24,17 @@
   </div>
 </div>
 
-<gridster [options]="options">
-  <gridster-item [item]="item" *ngFor="let item of dashboard">
+<gridster
+  [options]="options"
+  [ngStyle]="{ 'background-color': background ? 'grey' : 'white' }"
+>
+  <gridster-item
+    [item]="item"
+    *ngFor="let item of dashboard"
+    (dblclick)="toggleEditMode(item)"
+  >
     <tailor-tile
+      [id]="item['id']"
       [x]="item['x']"
       [y]="item['y']"
       [rows]="item['rows']"
@@ -34,8 +42,15 @@
       [title]="item['title']"
       [subtitle]="item['subtitle']"
       [body]="item['body']"
-      [editMode]="editing"
+      [editMode]="item['editing']"
+      [align]="item['align']"
+      [titleSize]="item['titleSize']"
+      [subtitleSize]="item['subtitleSize']"
+      [fromDate]="item['fromDate']"
+      [toDate]="item['toDate']"
       (duplicateEvent)="duplicateTile($event)"
+      (deleteEvent)="deleteTile($event)"
+      (saveEvent)="saveTile($event)"
     >
     </tailor-tile>
   </gridster-item>
