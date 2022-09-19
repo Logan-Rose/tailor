@@ -12,6 +12,10 @@
       >
       resume builder.
     </h2>
+    <button (click)="auth.googleSignin()">Sign in</button>
+    <div *ngIf="auth.user$ | async as user">
+      {{ user | json }}
+    </div>
   </div>
   <div style="height: 1080px; width: 50%">
     <tailor-editor></tailor-editor>

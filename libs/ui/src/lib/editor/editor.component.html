@@ -30,6 +30,9 @@
     <button mat-raised-button color="primary" (click)="print()" class="button">
       Print
     </button>
+    <button mat-raised-button color="primary" (click)="signIn()" class="button">
+      Sign In
+    </button>
     <!-- <div class="button-group-wrapper">
       <p class="button-group-label">Rows</p>
       <div class="button-group">
@@ -48,7 +51,7 @@
 </div>
 <gridster
   [options]="options"
-  [ngStyle]="{ 'background-color': background ? 'grey' : 'white' }"
+  [ngStyle]="{ 'background-color': background ? 'Gainsboro' : 'white' }"
 >
   <gridster-item
     [item]="item"

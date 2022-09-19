@@ -1,17 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {
   CompactType,
-  DisplayGrid,
-  Draggable,
   GridsterConfig,
   GridsterItem,
   GridType,
-  PushDirections,
-  Resizable
 } from 'angular-gridster2';
-import { TileComponent } from '../tile/tile.component';
 import { v4 as uuidv4 } from 'uuid';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 
 import { SaveDialogComponent } from '../save-dialog/save-dialog.component';
 
@@ -141,10 +136,15 @@ export class EditorComponent implements OnInit {
   }
   toggleEditMode(tile: any){
       tile.editing = !tile.editing
+      tile.editMode = ! tile.editMode
       tile.dragEnabled = !tile.dragEnabled
       console.log(this.dashboard)
   }
   toggleBackground(){
     this.background = !this.background
+  }
+
+  signIn(){
+    console.log('signing in')
   }
 }

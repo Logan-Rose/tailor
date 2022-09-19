@@ -18,6 +18,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 @NgModule({
   imports: [
     CommonModule,
@@ -35,7 +38,10 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     MatSelectModule,
     MatChipsModule,
-    MatIconModule
+    MatIconModule,
+    MatExpansionModule,
+    ReactiveFormsModule,
+    MatCheckboxModule
   ],
   declarations: [
     EditorComponent,

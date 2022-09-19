@@ -78,20 +78,24 @@
 <!-- EDIT MODE -->
 
 <div *ngIf="editing" class="container editing">
-  <mat-card>
-    <mat-card-title>Alignment</mat-card-title>
-    <mat-card-content>
+  <mat-accordion class="example-headers-align" multi>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Alignment </mat-panel-title>
+      </mat-expansion-panel-header>
+      <br />
       <mat-radio-group class="align" [(ngModel)]="align">
         <mat-radio-button value="left">Left</mat-radio-button>
         <mat-radio-button value="center">Center</mat-radio-button>
         <mat-radio-button value="right">Right</mat-radio-button>
       </mat-radio-group>
-    </mat-card-content>
-  </mat-card>
-  <br />
-  <mat-card>
-    <mat-card-title>Title</mat-card-title>
-    <mat-card-content>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Title </mat-panel-title>
+      </mat-expansion-panel-header>
+      <!-- content -->
       <mat-form-field appearance="outline">
         <div class="horizontal">
           <input matInput [(ngModel)]="title" placeholder="Title" />
@@ -110,13 +114,14 @@
           value="14"
         ></mat-slider>
       </div>
-    </mat-card-content>
-  </mat-card>
+      <!-- ------- -->
+    </mat-expansion-panel>
 
-  <br />
-  <mat-card>
-    <mat-card-title>Subtitle</mat-card-title>
-    <mat-card-content>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Subtitle </mat-panel-title>
+      </mat-expansion-panel-header>
+      <!-- content -->
       <mat-form-field appearance="outline">
         <input matInput [(ngModel)]="subtitle" placeholder="Subtitle" />
       </mat-form-field>
@@ -133,31 +138,35 @@
           value="14"
         ></mat-slider>
       </div>
-    </mat-card-content>
-  </mat-card>
-  <br />
-  <mat-card>
-    <mat-card-title>Time Period</mat-card-title>
-    <mat-card-content>
-      <mat-form-field appearance="fill">
+      <!-- ------- -->
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Time Period </mat-panel-title>
+      </mat-expansion-panel-header>
+      <!-- content -->
+      <mat-form-field appearance="outline">
         <mat-label>From</mat-label>
         <input [(ngModel)]="fromDate" matInput [matDatepicker]="from" />
         <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
         <mat-datepicker #from></mat-datepicker>
       </mat-form-field>
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>To</mat-label>
         <input [(ngModel)]="toDate" matInput [matDatepicker]="to" />
         <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
         <mat-datepicker #to></mat-datepicker>
       </mat-form-field>
-    </mat-card-content>
-  </mat-card>
-  <br />
-  <mat-card>
-    <mat-card-title>Body</mat-card-title>
-    <mat-card-content>
-      <mat-form-field appearance="fill">
+      <!-- ------- -->
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Body </mat-panel-title>
+      </mat-expansion-panel-header>
+      <!-- content -->
+      <mat-form-field appearance="outline">
         <mat-label>Body Type</mat-label>
         <mat-select [(ngModel)]="bodyType">
           <mat-option *ngFor="let type of BODY_TYPES" [value]="type">
@@ -203,7 +212,7 @@
         <mat-form-field
           class="example-chip-list"
           style="width: 100%"
-          appearance="fill"
+          appearance="outline"
         >
           <mat-label>List Items</mat-label>
           <mat-chip-list #chipList aria-label="List Items">
@@ -218,6 +227,7 @@
             </mat-chip>
             <input
               placeholder="New Entry..."
+              [formControl]="chipCtrl"
               [matChipInputFor]="chipList"
               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
               [matChipInputAddOnBlur]="addOnBlur"
@@ -226,6 +236,7 @@
           </mat-chip-list>
         </mat-form-field>
       </div>
-    </mat-card-content>
-  </mat-card>
+      <!-- ------- -->
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>

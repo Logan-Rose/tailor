@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { GridsterItem } from 'angular-gridster2';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { FormControl } from '@angular/forms';
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"
@@ -33,7 +34,7 @@ export class TileComponent implements OnInit, GridsterItem{
   @Output() duplicateEvent = new EventEmitter<TileComponent>();
   @Output() deleteEvent = new EventEmitter<string>();
   @Output() saveEvent = new EventEmitter<TileComponent>();
-
+  chipCtrl = new FormControl('');
 
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
@@ -95,12 +96,25 @@ export class TileComponent implements OnInit, GridsterItem{
     console.log(this.listItems)
   }
 
-  addChip(e:any){
-    if(e.value != ''){
-      this.listItems.push(e.value)
-      console.log(this.listItems)
+  addChip(event:any){
+    // if(e.value != ''){
+    //   this.listItems.push(e.value)
+    //   console.log(this.listItems)
+    // }
+
+    const value = (event.value || '').trim();
+
+    // Add our fruit
+    if (value) {
+      this.listItems.push(value);
     }
 
+    // Clear the input value
+    event.chipInput?.clear();
+
+    this.chipCtrl.setValue(null);
+
   }
+
 
 }

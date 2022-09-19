@@ -58,3 +58,11 @@ h1, h2{
   flex-direction: row;
   flex-wrap:wrap;
 }
+
+mat-expansion-panel-header {
+  background-color: white !important;
+}
+
+mat-expansion-panel-header:hover {
+  background-color: rgb(240, 228, 255) !important;
+}
