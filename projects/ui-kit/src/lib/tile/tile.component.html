@@ -1,22 +1,12 @@
 <div class="header" *ngIf="editMode">
   <div class="menu">
     <button
-      *ngIf="!editing"
       mat-raised-button
       color="primary"
-      (click)="toggleEdit()"
+      (click)="launchEditDialog()"
       class="button"
     >
       Edit
-    </button>
-    <button
-      *ngIf="editing"
-      mat-raised-button
-      color="primary"
-      (click)="save()"
-      class="button"
-    >
-      Save
     </button>
     <button
       mat-raised-button
@@ -37,10 +27,7 @@
   </div>
 </div>
 
-<!-- DISPLAY MDOE -->
-
 <div
-  *ngIf="!editing"
   class="container"
   [ngClass]="{
     left: align === 'left',
@@ -73,170 +60,4 @@
       }}</mat-chip>
     </mat-chip-list>
   </div>
-</div>
-
-<!-- EDIT MODE -->
-
-<div *ngIf="editing" class="container editing">
-  <mat-accordion class="example-headers-align" multi>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title> Alignment </mat-panel-title>
-      </mat-expansion-panel-header>
-      <br />
-      <mat-radio-group class="align" [(ngModel)]="align">
-        <mat-radio-button value="left">Left</mat-radio-button>
-        <mat-radio-button value="center">Center</mat-radio-button>
-        <mat-radio-button value="right">Right</mat-radio-button>
-      </mat-radio-group>
-    </mat-expansion-panel>
-
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title> Title </mat-panel-title>
-      </mat-expansion-panel-header>
-      <!-- content -->
-      <mat-form-field appearance="outline">
-        <div class="horizontal">
-          <input matInput [(ngModel)]="title" placeholder="Title" />
-        </div>
-      </mat-form-field>
-      <div class="horizontal">
-        <mat-form-field class="title-size-number">
-          <input matInput [(ngModel)]="titleSize" />
-        </mat-form-field>
-        <mat-slider
-          class="title-size-slider"
-          [(ngModel)]="titleSize"
-          min="10"
-          max="72"
-          step="1"
-          value="14"
-        ></mat-slider>
-      </div>
-      <!-- ------- -->
-    </mat-expansion-panel>
-
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title> Subtitle </mat-panel-title>
-      </mat-expansion-panel-header>
-      <!-- content -->
-      <mat-form-field appearance="outline">
-        <input matInput [(ngModel)]="subtitle" placeholder="Subtitle" />
-      </mat-form-field>
-      <div class="horizontal">
-        <mat-form-field class="title-size-number">
-          <input matInput [(ngModel)]="subtitleSize" />
-        </mat-form-field>
-        <mat-slider
-          class="title-size-slider"
-          [(ngModel)]="subtitleSize"
-          min="10"
-          max="72"
-          step="1"
-          value="14"
-        ></mat-slider>
-      </div>
-      <!-- ------- -->
-    </mat-expansion-panel>
-
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title> Time Period </mat-panel-title>
-      </mat-expansion-panel-header>
-      <!-- content -->
-      <mat-form-field appearance="outline">
-        <mat-label>From</mat-label>
-        <input [(ngModel)]="fromDate" matInput [matDatepicker]="from" />
-        <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
-        <mat-datepicker #from></mat-datepicker>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>To</mat-label>
-        <input [(ngModel)]="toDate" matInput [matDatepicker]="to" />
-        <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
-        <mat-datepicker #to></mat-datepicker>
-      </mat-form-field>
-      <!-- ------- -->
-    </mat-expansion-panel>
-
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title> Body </mat-panel-title>
-      </mat-expansion-panel-header>
-      <!-- content -->
-      <mat-form-field appearance="outline">
-        <mat-label>Body Type</mat-label>
-        <mat-select [(ngModel)]="bodyType">
-          <mat-option *ngFor="let type of BODY_TYPES" [value]="type">
-            {{ type }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <div *ngIf="bodyType === 'text'">
-        <mat-form-field appearance="outline" style="width: 100%">
-          <textarea
-            [(ngModel)]="body"
-            matInput
-            placeholder="Body text"
-          ></textarea>
-        </mat-form-field>
-      </div>
-
-      <div *ngIf="bodyType === 'bullet-list'">
-        <mat-form-field
-          appearance="outline"
-          style="width: 100%"
-          *ngFor="let item of listItems; let index = index"
-        >
-          <mat-label>Entry {{ index + 1 }}</mat-label>
-          <input
-            [name]="'' + index"
-            matInput
-            [ngModel]="listItems[index]"
-            (change)="onValueUpdate($event)"
-          />
-        </mat-form-field>
-        <button mat-raised-button (click)="addItem()" color="primary">
-          Add item
-        </button>
-        &nbsp;
-        <button mat-raised-button (click)="removeLastItem()">
-          Remove item
-        </button>
-      </div>
-
-      <div *ngIf="bodyType === 'chip-list'">
-        <mat-form-field
-          class="example-chip-list"
-          style="width: 100%"
-          appearance="outline"
-        >
-          <mat-label>List Items</mat-label>
-          <mat-chip-list #chipList aria-label="List Items">
-            <mat-chip
-              *ngFor="let item of listItems; let index = index"
-              (removed)="removeItemAtPos(index)"
-            >
-              {{ item }}
-              <button matChipRemove>
-                <mat-icon>cancel</mat-icon>
-              </button>
-            </mat-chip>
-            <input
-              placeholder="New Entry..."
-              [formControl]="chipCtrl"
-              [matChipInputFor]="chipList"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-              [matChipInputAddOnBlur]="addOnBlur"
-              (matChipInputTokenEnd)="addChip($event)"
-            />
-          </mat-chip-list>
-        </mat-form-field>
-      </div>
-      <!-- ------- -->
-    </mat-expansion-panel>
-  </mat-accordion>
 </div>

@@ -21,13 +21,14 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TestComponent } from './test/test.component';
-
+import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 @NgModule({
   declarations: [
     TestComponent,
     EditorComponent,
     TileComponent,
-    SaveDialogComponent
+    SaveDialogComponent,
+    EditDialogComponent
   ],
   imports: [
     CommonModule,

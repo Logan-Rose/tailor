@@ -2,7 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { GridsterItem } from 'angular-gridster2';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FormControl } from '@angular/forms';
-
+import {MatDialog} from '@angular/material/dialog';
+import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"
 ];
@@ -46,7 +47,7 @@ export class TileComponent implements OnInit, GridsterItem{
   ];
 
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
     console.log('Tile Constructed')
   }
 
@@ -54,9 +55,17 @@ export class TileComponent implements OnInit, GridsterItem{
     console.log('Tile Initilized')
   }
 
-  toggleEdit() {
-    this.editing = !this.editing
+  launchEditDialog(){
+    console.log('Edit')
+    const dialogRef = this.dialog.open(EditDialogComponent, {
+      data: this
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+    
   }
+
 
   simplifyDate(date: Date){
     return MONTHS[date.getMonth()] + ' ' + date.getFullYear()
