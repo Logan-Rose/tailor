@@ -58,7 +58,8 @@ export class TileComponent implements OnInit, GridsterItem{
   launchEditDialog(){
     console.log('Edit')
     const dialogRef = this.dialog.open(EditDialogComponent, {
-      data: this
+      data: this,
+      panelClass: 'my-class'
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');

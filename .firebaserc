@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "tailor-8761a": {
+      "hosting": {
+        "tailor": [
+          "tailor-8761a"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "tailor-8761a"
+  }
+}

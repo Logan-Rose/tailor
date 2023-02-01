@@ -100,6 +100,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "tailor:build:production",
+            "firebaseProject": "tailor-8761a",
+            "firebaseHostingSite": "tailor-8761a"
+          }
         }
       }
     },

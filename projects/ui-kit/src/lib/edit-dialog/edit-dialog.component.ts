@@ -28,10 +28,6 @@ export class EditDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('initialized');
-    console.log(';=====;')
-    console.log(this.tile)
-    console.log(';=====;')
   }
 
   edit(){

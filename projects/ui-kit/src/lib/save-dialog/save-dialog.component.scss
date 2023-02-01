@@ -4,7 +4,10 @@
   align-items: center;
   margin: 0px;
 }
-
+.hidden {
+  border: hidden !important;
+  box-shadow: none !important;
+}
 mat-card {
   border: none;
 }

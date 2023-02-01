@@ -14,7 +14,6 @@
   margin: 5px
 }
 
-
 .container {
   padding: 5px;
   display: flex !important;
@@ -65,4 +64,12 @@ mat-expansion-panel-header {
 
 mat-expansion-panel-header:hover {
   background-color: rgb(240, 228, 255) !important;
+}
+
+.my-class .mat-dialog-container{
+  height: 400px;
+  width: 600px;
+  border-radius: 100px;
+  background: lightcyan;
+  color: #039be5;
 }
