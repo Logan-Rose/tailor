@@ -12,19 +12,10 @@
       >
       resume builder.
     </h2>
-    <div *ngIf="auth.user | async as user; else showLogin">
-      <h1>Hello {{ user.email }}!</h1>
-      <button (click)="logout()">Logout</button>
-    </div>
     <ng-template #showLogin>
       <p>Please login.</p>
       <button (click)="login()">Login with Google</button>
     </ng-template>
-    <ul>
-      <li *ngFor="let item of item$ | async">
-        {{ item.name }}
-      </li>
-    </ul>
   </div>
   <div style="height: 1080px; width: 50%">
     <tailor-editor></tailor-editor>

@@ -1,0 +1,19 @@
+<mat-card class="vertical-container hidden">
+  <mat-card-title> Load Resume </mat-card-title>
+  <ng-template #fuck> FUCKß </ng-template>
+  <mat-card-content>
+    <div class="horizontal-container">
+      <div class="vertical-container">
+        <mat-action-list>
+          <button mat-list-item *ngFor="let item of resumes$ | async">
+            {{ item.name }}
+          </button>
+        </mat-action-list>
+      </div>
+    </div>
+  </mat-card-content>
+
+  <mat-card-footer style="padding-bottom: 10px">
+    <button mat-raised-button mat-dialog-close>Close</button>
+  </mat-card-footer>
+</mat-card>

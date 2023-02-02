@@ -1,6 +1,5 @@
 <div class="menu-container">
   <div class="menu">
-    <!-- <button mat-raised-button mat-dialog-close (click)="save()" ></button> -->
     <button
       mat-raised-button
       color="primary"
@@ -9,10 +8,22 @@
     >
       Add
     </button>
-    <button mat-raised-button color="primary" (click)="save()" class="button">
+    <button
+      *ngIf="auth.user | async as user"
+      mat-raised-button
+      color="primary"
+      (click)="save()"
+      class="button"
+    >
       Save
     </button>
-    <button mat-raised-button color="primary" (click)="load()" class="button">
+    <button
+      *ngIf="auth.user | async as user"
+      mat-raised-button
+      color="primary"
+      (click)="load()"
+      class="button"
+    >
       Load
     </button>
     <button
@@ -30,25 +41,29 @@
     <button mat-raised-button color="primary" (click)="print()" class="button">
       Print
     </button>
-    <button mat-raised-button color="primary" (click)="signIn()" class="button">
-      Sign In
-    </button>
-    <!-- <div class="button-group-wrapper">
-      <p class="button-group-label">Rows</p>
-      <div class="button-group">
-        <button class="mini-button" (click)="updateRow(1)">+</button>
-        <button class="mini-button" (click)="updateRow(-1)">-</button>
-      </div>
+    <div *ngIf="auth.user | async as user; else loggedOut">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="logout()"
+        class="button"
+      >
+        Sign Out
+      </button>
     </div>
-    <div class="button-group-wrapper">
-      <p class="button-group-label">Columns</p>
-      <div class="button-group">
-        <button class="mini-button" (click)="updateCol(1)">+</button>
-        <button class="mini-button" (click)="updateCol(-1)">-</button>
-      </div>
-    </div> -->
+    <ng-template #loggedOut>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="login()"
+        class="button"
+      >
+        Sign In
+      </button>
+    </ng-template>
   </div>
 </div>
+
 <gridster
   [options]="options"
   [ngStyle]="{ 'background-color': background ? 'Gainsboro' : 'white' }"

@@ -22,13 +22,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TestComponent } from './test/test.component';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
+import { LoadDialogComponent } from './load-dialog/load-dialog.component';
+import { MatListModule } from '@angular/material/list';
 @NgModule({
   declarations: [
     TestComponent,
     EditorComponent,
     TileComponent,
     SaveDialogComponent,
-    EditDialogComponent
+    EditDialogComponent,
+    LoadDialogComponent
   ],
   imports: [
     CommonModule,
@@ -48,7 +51,8 @@ import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
     MatIconModule,
     MatExpansionModule,
     ReactiveFormsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatListModule
   ],
   exports: [
     TestComponent,

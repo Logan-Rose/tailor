@@ -7,8 +7,12 @@ import {
 } from 'angular-gridster2';
 import { v4 as uuidv4 } from 'uuid';
 import {MatDialog} from '@angular/material/dialog';
-
+import { Firestore, collectionData, collection } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import firebase from 'firebase/compat/app';
+import { observable, Observable } from 'rxjs';
 import { SaveDialogComponent } from '../save-dialog/save-dialog.component';
+import { LoadDialogComponent } from '../load-dialog/load-dialog.component';
 
 @Component({
   selector: 'tailor-editor',
@@ -19,8 +23,16 @@ export class EditorComponent implements OnInit {
   options: GridsterConfig;
   dashboard: Array<GridsterItem>;
   background = true;
-  constructor(public dialog: MatDialog) {
+  resumes$: Observable<any[]> | undefined;
+
+  constructor(public dialog: MatDialog, firestore: Firestore, public auth: AngularFireAuth) {
     console.log('editor constructed')
+    let self = this
+    auth.user.subscribe((x =>{
+      const collectionVar = collection(firestore, `items/${x?.email}/layouts`);
+      self.resumes$ = collectionData(collectionVar);
+    }))
+    
     this.options = {}
     this.dashboard = []
   }
@@ -55,6 +67,12 @@ export class EditorComponent implements OnInit {
        {id: uuidv4(), cols: 10, rows: 10, y: 0, x: 0, title: 'Logan Rose', subtitle: 'Software Engineer', align: "center", titleSize:12, subtitleSize:12, listItems: ['hello','goodbye'], dragEnabled: true},
        {id: uuidv4(), cols: 2, rows: 2, y: 0, x: 2, title: 'Coveo', subtitle: 'Software Developer Consultant', bodyType:'chip-list',listItems:['hello','goodbye','javascript','python','angular','nestjs','postgresql'], align:"left", titleSize:12, subtitleSize:12, dragEnabled: true}
      ];
+  }
+  login() {
+    this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  }
+  logout() {
+    this.auth.signOut();
   }
 
   itemChange(){
@@ -91,6 +109,13 @@ export class EditorComponent implements OnInit {
   }
   load(){
     console.log('Load')
+    const dialogRef = this.dialog.open(LoadDialogComponent, {
+      data: this.resumes$
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
   print(){
     console.log(this.dashboard)
@@ -146,7 +171,4 @@ export class EditorComponent implements OnInit {
     this.background = !this.background
   }
 
-  signIn(){
-    console.log('signing in')
-  }
 }
