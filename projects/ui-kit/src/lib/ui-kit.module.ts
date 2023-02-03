@@ -24,6 +24,7 @@ import { TestComponent } from './test/test.component';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import { LoadDialogComponent } from './load-dialog/load-dialog.component';
 import { MatListModule } from '@angular/material/list';
+import { CrudService } from './crud.service';
 @NgModule({
   declarations: [
     TestComponent,
@@ -58,6 +59,9 @@ import { MatListModule } from '@angular/material/list';
     TestComponent,
     EditorComponent, 
     TileComponent
+  ],
+  providers: [
+    CrudService
   ]
 })
 export class UiKitModule { }

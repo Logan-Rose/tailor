@@ -10,10 +10,11 @@
 
 .menu{
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .button {
-  margin-left: 5px;
-  margin-right: 5px;
+  margin: 5px;
 }
 
 .button-group-label{

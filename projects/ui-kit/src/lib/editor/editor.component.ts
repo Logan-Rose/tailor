@@ -98,7 +98,9 @@ export class EditorComponent implements OnInit {
     console.log('Save')
     console.log(this.dashboard)
     const dialogRef = this.dialog.open(SaveDialogComponent, {
-      data: this.dashboard
+      data: {
+        dashboard: this.dashboard
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
