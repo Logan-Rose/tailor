@@ -9,6 +9,7 @@ import { Observable, observable } from 'rxjs';
 })
 export class LoadDialogComponent implements OnInit {
   resumes$: Observable<any> | undefined
+  selection: any;
   constructor(
     public dialogRef: MatDialogRef<LoadDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -21,6 +22,19 @@ export class LoadDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  selectItem(item: any){
+    this.selection = item;
+  }
+
+  cancel() {
+    this.dialogRef.close()
+
+  }
+
+  confirm() {
+    this.dialogRef.close({data: this.selection})
   }
 
 }

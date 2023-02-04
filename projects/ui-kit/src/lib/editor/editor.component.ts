@@ -117,6 +117,7 @@ export class EditorComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      this.dashboard = result.data.layout.dashboard
     });
   }
   print(){

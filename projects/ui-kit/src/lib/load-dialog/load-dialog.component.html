@@ -5,7 +5,11 @@
     <div class="horizontal-container">
       <div class="vertical-container">
         <mat-action-list>
-          <button mat-list-item *ngFor="let item of resumes$ | async">
+          <button
+            mat-list-item
+            *ngFor="let item of resumes$ | async"
+            (click)="selectItem(item)"
+          >
             {{ item.name }}
           </button>
         </mat-action-list>
@@ -14,6 +18,8 @@
   </mat-card-content>
 
   <mat-card-footer style="padding-bottom: 10px">
-    <button mat-raised-button mat-dialog-close>Close</button>
+    <button mat-raised-button (click)="cancel()">Close</button>
+    &nbsp;
+    <button mat-raised-button color="primary" (click)="confirm()">Load</button>
   </mat-card-footer>
 </mat-card>
